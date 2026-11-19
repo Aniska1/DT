@@ -6,7 +6,7 @@ ElderEase is a front-end design-thinking prototype exploring how a simplified, v
 
 ---
 
-## 🌟 What's New in this Version (Based on Teacher & User Feedback)
+##  What's New in this Version (Based on Teacher & User Feedback)
 
 As requested by our teachers during design reviews, this version incorporates real user feedback and introduces key new features:
 
@@ -20,9 +20,9 @@ As requested by our teachers during design reviews, this version incorporates re
 3. **Senior-Friendly Authentication & Account Creation:**
    - Simple **4-Digit Security PIN** instead of complex passwords with special characters.
    - **Quick 1-Tap Demo Access** for:
-     - 👴 **Ramesh Kumar** (Senior Citizen · 74y)
-     - 👩 **Anita** (Daughter & Caregiver)
-     - 🎓 **Teacher / Evaluator Demo** (instant grading and exploration without typing)
+     -  **Ramesh Kumar** (Senior Citizen · 74y)
+     -  **Anita** (Daughter & Caregiver)
+     -  **Teacher / Evaluator Demo** (instant grading and exploration without typing)
    - Seamless transition from **Login → Create Account → Dashboard**.
    - Profile switching and logout option from the top bar.
 4. **Daily Pills & Medicine Tracker:**
@@ -30,7 +30,7 @@ As requested by our teachers during design reviews, this version incorporates re
    - One-tap **"Mark as Taken"** with visual status tags and audio confirmation.
    - **🔊 Read Medicine Schedule** button speaks dosage timings aloud.
 5. **Daily Wellness & Mood Check-in:**
-   - One-click mood sharing on the home screen: Feeling Good 😊, Doing Okay 😐, Need Care 😔.
+   - One-click mood sharing on the home screen: Feeling Good , Doing Okay , Need Care .
 6. **Live Teacher & User Feedback Portal:**
    - Developed specifically to meet the evaluation requirement of gathering user feedback.
    - Teachers and testers can submit 5-star ratings, select tested features, and propose new ideas.
@@ -38,7 +38,7 @@ As requested by our teachers during design reviews, this version incorporates re
 
 ---
 
-## 🚀 How to Run Locally
+##  How to Run Locally
 
 1. Open the project folder (`DT`).
 2. Double-click `index.html` to open it in any modern web browser (Google Chrome, Microsoft Edge, or Safari).
@@ -49,7 +49,7 @@ As requested by our teachers during design reviews, this version incorporates re
 
 ---
 
-## 🌐 Publish with GitHub Pages
+##  Publish with GitHub Pages
 
 1. Create a public repository on GitHub named `ElderEase`.
 2. Push or upload all files:
@@ -66,7 +66,7 @@ As requested by our teachers during design reviews, this version incorporates re
 
 ---
 
-## 🎨 Accessibility & Technical Features
+##  Accessibility & Technical Features
 
 - **Adjustable Text Size:** 5 levels (Small, Normal, Large, Larger, Largest) with automatic roomier grid reflow.
 - **High-Contrast Mode:** Enhanced contrast conforming to WCAG 2.1 AAA.
@@ -76,13 +76,13 @@ As requested by our teachers during design reviews, this version incorporates re
 
 ---
 
-## 📑 Design-Thinking Documentation
+##  Design-Thinking Documentation
 For full details on the 5-stage Design Thinking process (Empathize, Define, Ideate, Prototype, Test), user personas, and the feedback-driven iteration matrix, see:
 [`documentation/design-thinking-process.md`](documentation/design-thinking-process.md).
 
 ---
 
-## ⚠️ Prototype Limitations
+##  Prototype Limitations
 - Contacts and calls are interactive demonstrations and do not place real telephone calls.
 - The SOS emergency screen is an illustrative prototype and does not contact emergency services.
 - Speech output relies on browser and operating system Text-to-Speech (TTS) engine support.
