@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#123b39" />
+  <title>ElderEase — Technology made simpler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Noto+Sans+Kannada:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
+
+  <!-- ================================================================= -->
+  <!-- 1. LOGIN SCREEN (With Trilingual Large-Text Selector & Voice Help) -->
+  <!-- ================================================================= -->
+  <section class="auth-screen active" id="login-screen" aria-label="Login Screen">
+    <div class="auth-container">
+      <header class="auth-header">
+        <div class="auth-brand">
+          <span class="brand-mark" aria-hidden="true">e</span>
+          <div>
+            <strong>ElderEase</strong>
+            <small data-i18n="brand_tag">Simple. Clear. Connected.</small>
+          </div>
+        </div>
+        <div class="auth-quick-tools" aria-label="Quick accessibility controls">
+          <div class="size-controls mini" role="group" aria-label="Adjust text size">
+            <button type="button" class="tool-btn" id="login-smaller-text" aria-label="Decrease text size">A−</button>
+            <span class="size-label mini-label" id="login-size-label">Normal</span>
+            <button type="button" class="tool-btn" id="login-larger-text" aria-label="Increase text size">A+</button>
+          </div>
+          <button type="button" class="tool-btn voice-chip-btn" id="login-voice-guide-btn" data-i18n-aria="login_voice_btn" title="Listen to voice help">
+            <span aria-hidden="true">🔊</span> <span data-i18n="login_voice_btn">🔊 Listen to Login Help</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Large Trilingual Language Switcher Cards (Enlarged Text in Native Scripts) -->
+      <div class="lang-selector-box">
+        <div class="lang-selector-title">
+          <span class="eyebrow" data-i18n="login_lang_heading">Choose your language / अपनी भाषा चुनें / ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</span>
+          <p class="lang-hint-text" data-i18n="login_lang_hint">Large buttons in your language — tap once to switch</p>
+        </div>
+        <div class="large-lang-grid" role="radiogroup" aria-label="Language selection">
+          <button type="button" class="lang-big-btn active" data-lang="en" role="radio" aria-checked="true">
+            <span class="lang-native">English</span>
+            <span class="lang-sub">Simple English</span>
+            <span class="lang-tick" aria-hidden="true">✓</span>
+          </button>
+          <button type="button" class="lang-big-btn" data-lang="hi" lang="hi" role="radio" aria-checked="false">
+            <span class="lang-native">हिन्दी</span>
+            <span class="lang-sub">सरल हिन्दी</span>
+            <span class="lang-tick" aria-hidden="true">✓</span>
+          </button>
+          <button type="button" class="lang-big-btn" data-lang="kn" lang="kn" role="radio" aria-checked="false">
+            <span class="lang-native">ಕನ್ನಡ</span>
+            <span class="lang-sub">ಸುಲಭ ಕನ್ನಡ</span>
+            <span class="lang-tick" aria-hidden="true">✓</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Login Form Card -->
+      <div class="auth-card">
+        <div class="auth-card-head">
+          <span class="welcome-tag" data-i18n="login_eyebrow">WELCOME TO ELDEREASE</span>
+          <h1 class="auth-title" data-i18n="login_h">Technology made simple & safe for you</h1>
+          <p class="auth-subtitle" data-i18n="login_p">Choose your language, enter your simple PIN, or tap a one-click quick login below.</p>
+        </div>
+
+        <form class="auth-form" id="login-form" novalidate>
+          <div class="form-group">
+            <label for="login-phone" class="form-label">
+              <span data-i18n="login_phone_label">Mobile Number or Caregiver Contact</span>
+              <button type="button" class="speak-field-btn" data-speak="login_phone_label" aria-label="Read mobile number field aloud">🔊</button>
+            </label>
+            <input type="tel" id="login-phone" class="form-input" placeholder="e.g. 98765 43210" data-i18n-ph="login_phone_ph" autocomplete="tel" value="9876543210" />
+          </div>
+
+          <div class="form-group">
+            <label for="login-pin" class="form-label">
+              <span data-i18n="login_pin_label">Simple 4-Digit Security PIN</span>
+              <button type="button" class="speak-field-btn" data-speak="login_pin_label" aria-label="Read PIN field aloud">🔊</button>
+            </label>
+            <div class="pin-input-wrap">
+              <input type="password" id="login-pin" class="form-input pin-input" maxlength="6" placeholder="••••" data-i18n-ph="login_pin_ph" autocomplete="current-password" value="1234" />
+              <button type="button" id="toggle-login-pin" class="pin-toggle-btn" aria-label="Show PIN" data-i18n="login_show_pin">Show PIN</button>
+            </div>
+          </div>
+
+          <div class="form-row-checkbox">
+            <label class="custom-check-label">
+              <input type="checkbox" id="login-remember" checked />
+              <span class="custom-check-box" aria-hidden="true"></span>
+              <span data-i18n="login_remember">Keep me signed in on this device</span>
+            </label>
+          </div>
+
+          <button type="submit" class="auth-submit-btn" id="login-btn">
+            <span data-i18n="login_btn">Log In to My Space</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <!-- Quick 1-Tap Demo Login (Designed for Seniors & Teacher Evaluation) -->
+        <div class="quick-login-section">
+          <div class="quick-login-divider">
+            <span data-i18n="login_quick_heading">Quick 1-Tap Login (Designed for Seniors & Evaluators)</span>
+          </div>
+          <p class="quick-login-sub" data-i18n="login_quick_sub">No password to remember. Tap your name or test as an evaluator.</p>
+          <div class="quick-login-cards">
+            <button type="button" class="quick-user-card" data-quick-user="ramesh">
+              <span class="user-avatar peach" aria-hidden="true">👴</span>
+              <div class="quick-user-info">
+                <strong data-i18n="login_as_ramesh">👴 Ramesh Kumar (Senior · 74y)</strong>
+                <small>Kannada & Hindi user · PIN saved</small>
+              </div>
+              <span class="quick-card-arrow" aria-hidden="true">➔</span>
+            </button>
+
+            <button type="button" class="quick-user-card" data-quick-user="anita">
+              <span class="user-avatar lilac" aria-hidden="true">👩</span>
+              <div class="quick-user-info">
+                <strong data-i18n="login_as_anita">👩 Anita (Daughter & Caregiver)</strong>
+                <small>Family caregiver · Full dashboard</small>
+              </div>
+              <span class="quick-card-arrow" aria-hidden="true">➔</span>
+            </button>
+
+            <button type="button" class="quick-user-card evaluator-card" data-quick-user="evaluator">
+              <span class="user-avatar blue" aria-hidden="true">🎓</span>
+              <div class="quick-user-info">
+                <strong data-i18n="login_as_guest">🎓 Teacher / Evaluator Demo</strong>
+                <small>Instant access to all features & testing log</small>
+              </div>
+              <span class="quick-card-arrow" aria-hidden="true">➔</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-footer-link">
+          <span data-i18n="login_no_account">New to ElderEase?</span>
+          <button type="button" class="link-button" id="go-to-signup" data-i18n="login_create_btn">Create an Account</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- 2. CREATE ACCOUNT SCREEN (Signup Flow for Seniors & Caregivers)  -->
+  <!-- ================================================================= -->
+  <section class="auth-screen" id="signup-screen" aria-label="Create Account Screen">
+    <div class="auth-container">
+      <header class="auth-header">
+        <div class="auth-brand">
+          <span class="brand-mark" aria-hidden="true">e</span>
+          <div>
+            <strong>ElderEase</strong>
+            <small data-i18n="brand_tag">Simple. Clear. Connected.</small>
+          </div>
+        </div>
+        <div class="auth-quick-tools" aria-label="Quick accessibility controls">
+          <div class="size-controls mini" role="group" aria-label="Adjust text size">
+            <button type="button" class="tool-btn size-btn-dec" id="signup-smaller-text" aria-label="Decrease text size">A−</button>
+            <span class="size-label mini-label" id="signup-size-label">Normal</span>
+            <button type="button" class="tool-btn size-btn-inc" id="signup-larger-text" aria-label="Increase text size">A+</button>
+          </div>
+          <button type="button" class="tool-btn voice-chip-btn" id="signup-voice-guide-btn" data-i18n-aria="signup_voice_btn" title="Listen to sign up instructions">
+            <span aria-hidden="true">🔊</span> <span data-i18n="signup_voice_btn">🔊 Listen to Sign Up Help</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Large Trilingual Language Switcher Cards (Enlarged Text in Native Scripts) -->
+      <div class="lang-selector-box">
+        <div class="lang-selector-title">
+          <span class="eyebrow" data-i18n="login_lang_heading">Choose your language / अपनी भाषा चुनें / ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</span>
+          <p class="lang-hint-text" data-i18n="login_lang_hint">Large buttons in your language — tap once to switch</p>
+        </div>
+        <div class="large-lang-grid" role="radiogroup" aria-label="Language selection">
+          <button type="button" class="lang-big-btn active" data-lang="en" role="radio" aria-checked="true">
+            <span class="lang-native">English</span>
+            <span class="lang-sub">Simple English</span>
+            <span class="lang-tick" aria-hidden="true">✓</span>
+          </button>
+          <button type="button" class="lang-big-btn" data-lang="hi" lang="hi" role="radio" aria-checked="false">
+            <span class="lang-native">हिन्दी</span>
+            <span class="lang-sub">सरल हिन्दी</span>
+            <span class="lang-tick" aria-hidden="true">✓</span>
+          </button>
+          <button type="button" class="lang-big-btn" data-lang="kn" lang="kn" role="radio" aria-checked="false">
+            <span class="lang-native">ಕನ್ನಡ</span>
+            <span class="lang-sub">ಸುಲಭ ಕನ್ನಡ</span>
+            <span class="lang-tick" aria-hidden="true">✓</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="auth-card">
+        <div class="auth-card-head">
+          <span class="welcome-tag" data-i18n="signup_eyebrow">NEW ACCOUNT SETUP</span>
+          <h1 class="auth-title" data-i18n="signup_h">Set up your ElderEase space</h1>
+          <p class="auth-subtitle" data-i18n="signup_p">We only ask for a few simple details so family can stay connected and you feel safe.</p>
+        </div>
+
+        <form class="auth-form" id="signup-form" novalidate>
+          <div class="form-group">
+            <label for="signup-name" class="form-label">
+              <span data-i18n="signup_name_label">Your Full Name</span>
+              <button type="button" class="speak-field-btn" data-speak="signup_name_label" aria-label="Read full name field aloud">🔊</button>
+            </label>
+            <input type="text" id="signup-name" class="form-input" placeholder="e.g. Ramesh Kumar" data-i18n-ph="signup_name_ph" required />
+          </div>
+
+          <div class="form-group">
+            <label for="signup-phone" class="form-label">
+              <span data-i18n="signup_phone_label">Your Mobile Number</span>
+              <button type="button" class="speak-field-btn" data-speak="signup_phone_label" aria-label="Read mobile number field aloud">🔊</button>
+            </label>
+            <input type="tel" id="signup-phone" class="form-input" placeholder="e.g. 98765 43210" data-i18n-ph="signup_phone_ph" required />
+          </div>
+
+          <div class="form-group">
+            <label for="signup-pin" class="form-label">
+              <span data-i18n="signup_pin_label">Choose a Simple 4-Digit PIN</span>
+              <button type="button" class="speak-field-btn" data-speak="signup_pin_label" aria-label="Read PIN setup field aloud">🔊</button>
+            </label>
+            <input type="password" id="signup-pin" class="form-input pin-input" maxlength="6" placeholder="e.g. 1234" data-i18n-ph="signup_pin_ph" required />
+            <small class="field-hint" data-i18n="signup_pin_hint">Choose something easy to remember, like your birth year or 1234.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-caregiver" class="form-label">
+              <span data-i18n="signup_care_label">Family or Caregiver Contact (Optional)</span>
+              <button type="button" class="speak-field-btn" data-speak="signup_care_label" aria-label="Read caregiver contact field aloud">🔊</button>
+            </label>
+            <input type="text" id="signup-caregiver" class="form-input" placeholder="e.g. Daughter Anita - 98765 43211" data-i18n-ph="signup_care_ph" />
+            <small class="field-hint" data-i18n="signup_care_hint">This person will be listed in your quick emergency contacts.</small>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <span data-i18n="signup_lang_label">Preferred Display Language</span>
+            </label>
+            <div class="lang-controls" role="radiogroup" aria-label="Preferred language">
+              <button type="button" class="lang-pill-btn active" data-signup-lang="en">English</button>
+              <button type="button" class="lang-pill-btn" data-signup-lang="hi" lang="hi">हिन्दी</button>
+              <button type="button" class="lang-pill-btn" data-signup-lang="kn" lang="kn">ಕನ್ನಡ</button>
+            </div>
+          </div>
+
+          <button type="submit" class="auth-submit-btn" id="signup-submit-btn">
+            <span data-i18n="signup_submit_btn">Create Account & Enter Space</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div class="auth-footer-link">
+          <span data-i18n="signup_already">Already have an account?</span>
+          <button type="button" class="link-button" id="go-to-login" data-i18n="signup_login_link">Back to Log In</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- 3. MAIN DASHBOARD APPLICATION SHELL                              -->
+  <!-- ================================================================= -->
+  <div class="app-shell" id="dashboard-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="ElderEase home">
+        <span class="brand-mark" aria-hidden="true">e</span>
+        <span><strong>ElderEase</strong><small data-i18n="brand_tag">Simple. Clear. Connected.</small></span>
+      </a>
+      
+      <!-- Current User Mini Badge -->
+      <div class="sidebar-user-card" id="sidebar-user-card">
+        <span class="sidebar-user-avatar" id="sidebar-user-avatar">👴</span>
+        <div class="sidebar-user-text">
+          <small data-i18n="user_logged_in_as">Signed in as</small>
+          <strong id="sidebar-user-name">Ramesh Kumar</strong>
+        </div>
+        <button type="button" class="user-switch-mini-btn" id="sidebar-switch-btn" data-i18n-title="btn_switch_user" title="Switch Profile">⇄</button>
+      </div>
+
+      <div class="side-label" data-i18n="side_label">YOUR SPACE</div>
+      <button class="nav-item active" data-view="home" aria-current="page"><span aria-hidden="true">⌂</span> <span data-i18n="nav_home">Home</span></button>
+      <button class="nav-item" data-view="contacts"><span aria-hidden="true">♡</span> <span data-i18n="nav_people">My people</span></button>
+      <button class="nav-item" data-view="pills"><span aria-hidden="true">💊</span> <span data-i18n="nav_pills">Daily Pills</span></button>
+      <button class="nav-item" data-view="help"><span aria-hidden="true">☏</span> <span data-i18n="nav_help">Get help</span></button>
+      <button class="nav-item" data-view="messages"><span aria-hidden="true">✉</span> <span data-i18n="nav_messages">Messages</span></button>
+      <button class="nav-item" data-view="feedback"><span aria-hidden="true">💬</span> <span data-i18n="nav_feedback">Teacher Feedback</span></button>
+      <button class="nav-item" data-view="settings"><span aria-hidden="true">⚙</span> <span data-i18n="nav_settings">Settings</span></button>
+
+      <div class="sidebar-note">
+        <span class="note-icon" aria-hidden="true">☀</span>
+        <strong data-i18n="note_title">Take your time.</strong>
+        <p data-i18n="note_body">There is no rush. Everything you need is right here.</p>
+      </div>
+
+      <div class="sidebar-bottom">
+        <span class="online-dot" aria-hidden="true"></span> <span data-i18n="acc_on">Accessibility mode is on</span>
+      </div>
+    </aside>
+
+    <main class="main-content" id="main" tabindex="-1">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="today-label">YOUR FRIENDLY PHONE SPACE</p>
+          <h1 id="page-title" aria-live="polite">Good morning, Ramesh-ji!</h1>
+        </div>
+        <div class="top-actions">
+          <div class="size-controls mini topbar-size-ctrl" role="group" aria-label="Adjust text size">
+            <button type="button" class="tool-btn size-btn-dec" id="topbar-smaller-text" aria-label="Decrease text size">A−</button>
+            <span class="size-label mini-label" id="topbar-size-label">Normal</span>
+            <button type="button" class="tool-btn size-btn-inc" id="topbar-larger-text" aria-label="Increase text size">A+</button>
+          </div>
+
+          <button class="icon-button voice-topbar-btn" id="read-page" data-i18n-aria="read_page" data-i18n-title="read_page" aria-label="Read page aloud" title="Read page aloud">🔊</button>
+          
+          <button class="profile-chip" id="topbar-profile-chip" aria-label="Current user profile and options">
+            <span class="avatar" id="topbar-avatar" aria-hidden="true">R</span>
+            <span id="topbar-user-name">Ramesh</span>
+            <span class="chip-badge" data-i18n="btn_logout">Sign Out</span>
+          </button>
+          
+          <button class="profile-chip" id="settings-shortcut" data-i18n-aria="open_settings_aria" aria-label="Open accessibility settings">
+            <span class="avatar" aria-hidden="true">⚙</span><span data-i18n="settings">Settings</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- VIEW 1: HOME VIEW -->
+      <section class="view active" id="home-view">
+        <div class="welcome-card">
+          <div>
+            <span class="welcome-tag" data-i18n="welcome_tag">A LITTLE HELP, A LOT OF INDEPENDENCE</span>
+            <h2 data-i18n-html="welcome_h2">What would you<br>like to do today?</h2>
+            <p data-i18n="welcome_p">Choose a big button below. You can always come back home.</p>
+            <button type="button" class="tool-btn voice-chip-btn" id="read-home-voice" style="margin-top:14px;">
+              <span aria-hidden="true">🔊</span> <span data-i18n="sp_read_home">🔊 Listen to Home Guide</span>
+            </button>
+          </div>
+          <div class="welcome-art" aria-hidden="true">
+            <span class="sun">☀</span>
+            <span class="plant">✿</span>
+            <span class="art-circle"></span>
+          </div>
+        </div>
+
+        <!-- Daily Wellness / Mood Check-in Widget (New Feature) -->
+        <div class="wellness-widget">
+          <div class="wellness-header">
+            <div>
+              <span class="eyebrow" data-i18n="wellness_title">How are you feeling today?</span>
+              <p class="wellness-sub" data-i18n="wellness_p">Tap an emoji to let family know how you feel today.</p>
+            </div>
+            <button type="button" class="speak-field-btn" data-speak="wellness_title" aria-label="Read wellness question aloud">🔊</button>
+          </div>
+          <div class="mood-button-group">
+            <button type="button" class="mood-btn" data-mood="good" data-i18n="mood_good">Feeling Good 😊</button>
+            <button type="button" class="mood-btn" data-mood="okay" data-i18n="mood_okay">Doing Okay 😐</button>
+            <button type="button" class="mood-btn" data-mood="help" data-i18n="mood_help">Need a Little Care 😔</button>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" data-i18n="quick_eyebrow">QUICK ACCESS</span>
+            <h2 data-i18n="quick_h">Your everyday actions</h2>
+          </div>
+          <span class="small-hint" data-i18n="quick_hint">Tap any card to begin</span>
+        </div>
+
+        <div class="action-grid">
+          <button class="action-card call-card" data-action="call">
+            <span class="action-icon" aria-hidden="true">☎</span>
+            <strong data-i18n="card_call_t">Make a call</strong>
+            <small data-i18n="card_call_s">Talk to someone you know</small>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="action-card people-card" data-action="contacts">
+            <span class="action-icon" aria-hidden="true">♡</span>
+            <strong data-i18n="card_people_t">My people</strong>
+            <small data-i18n="card_people_s">Find family and friends</small>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="action-card pills-card" data-action="pills">
+            <span class="action-icon" aria-hidden="true">💊</span>
+            <strong data-i18n="card_pills_t">Daily Pills</strong>
+            <small data-i18n="card_pills_s">View today's medicine times</small>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="action-card message-card" data-action="messages">
+            <span class="action-icon" aria-hidden="true">✉</span>
+            <strong data-i18n="card_msg_t">Messages</strong>
+            <small data-i18n="card_msg_s">See a sample message</small>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="action-card help-card" data-action="help">
+            <span class="action-icon" aria-hidden="true">＋</span>
+            <strong data-i18n="card_help_t">Emergency help</strong>
+            <small data-i18n="card_help_s">See your help options</small>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="action-card feedback-card" data-action="feedback">
+            <span class="action-icon" aria-hidden="true">💬</span>
+            <strong data-i18n="card_feedback_t">Teacher Feedback</strong>
+            <small data-i18n="card_feedback_s">Evaluate & suggest features</small>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="tip-card">
+            <div class="tip-icon" aria-hidden="true">✦</div>
+            <div>
+              <span class="eyebrow" data-i18n="tip_eyebrow">A GENTLE REMINDER</span>
+              <h3 data-i18n="tip_h">You are doing great.</h3>
+              <p data-i18n="tip_p">If something feels confusing, tap the speaker button and the page can read its instructions aloud.</p>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div>
+              <span class="eyebrow" data-i18n="cmf_eyebrow">MAKE IT COMFORTABLE</span>
+              <h3 data-i18n="cmf_h">Change how things look</h3>
+              <p data-i18n="cmf_p">Make text bigger or choose stronger contrast.</p>
+            </div>
+            <button class="secondary-button" id="open-settings">
+              <span data-i18n="cmf_btn">Accessibility settings</span> <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: CONTACTS VIEW -->
+      <section class="view" id="contacts-view">
+        <div class="page-intro">
+          <span class="eyebrow" data-i18n="c_eyebrow">STAY CLOSE</span>
+          <h2 data-i18n="c_h">Your people</h2>
+          <p data-i18n="c_p">People you may want to reach quickly. These are sample contacts for this prototype.</p>
+          <button type="button" class="secondary-button" id="read-contacts-voice" style="margin-top:12px;">
+            <span data-i18n="read_contacts">🔊 Read Contacts Aloud</span>
+          </button>
+        </div>
+        <div class="contact-list" id="contact-list">
+          <article class="contact-card">
+            <span class="contact-avatar peach" aria-hidden="true">A</span>
+            <div>
+              <strong data-i18n="c_anita">Anita (Daughter)</strong>
+              <small data-i18n="c_family">Family · Sample contact</small>
+            </div>
+            <button class="call-small" data-contact="anita" data-i18n="b_anita">Call Anita</button>
+          </article>
+          <article class="contact-card">
+            <span class="contact-avatar blue" aria-hidden="true">R</span>
+            <div>
+              <strong data-i18n="c_rahul">Rahul (Son)</strong>
+              <small data-i18n="c_family">Family · Sample contact</small>
+            </div>
+            <button class="call-small" data-contact="rahul" data-i18n="b_rahul">Call Rahul</button>
+          </article>
+          <article class="contact-card">
+            <span class="contact-avatar lilac" aria-hidden="true">D</span>
+            <div>
+              <strong data-i18n="c_doc">Dr. Mehta (Family Doctor)</strong>
+              <small data-i18n="c_doctor">Doctor · Sample contact</small>
+            </div>
+            <button class="call-small" data-contact="doc" data-i18n="b_doc">Call Doctor</button>
+          </article>
+        </div>
+        <div class="notice">
+          <span aria-hidden="true">ⓘ</span>
+          <p data-i18n="c_notice">These names are examples only. A real version would let the user or caregiver add verified contacts.</p>
+        </div>
+      </section>
+
+      <!-- VIEW 3: DAILY PILLS / MEDICINE TRACKER (NEW FEATURE REQUESTED BY TEACHERS & USERS) -->
+      <section class="view" id="pills-view">
+        <div class="page-intro">
+          <span class="eyebrow" data-i18n="pills_eyebrow">HEALTH & WELLBEING</span>
+          <h2 data-i18n="pills_h">Today's Medicine Schedule</h2>
+          <p data-i18n="pills_p">Simple reminders so you never miss your medication. Tap any pill when taken, or listen to voice audio.</p>
+        </div>
+
+        <div class="view-action-bar">
+          <button class="secondary-button" id="read-pills-voice">
+            <span data-i18n="pills_voice_btn">🔊 Read Medicine Schedule</span>
+          </button>
+        </div>
+
+        <div class="pill-list" id="pill-list">
+          <!-- Morning Pill -->
+          <article class="pill-card" id="pill-morning" data-pill-id="morning">
+            <div class="pill-badge-col">
+              <span class="pill-icon-sym" aria-hidden="true">🌅</span>
+              <span class="pill-status-tag taken" id="morning-status" data-i18n="pill_status_taken">Taken on time</span>
+            </div>
+            <div class="pill-info-col">
+              <strong data-i18n="pill_morning_t">Blood Pressure Tablet (Telmisartan 40mg)</strong>
+              <small class="pill-time" data-i18n="pill_morning_time">Morning · 8:30 AM (After Breakfast)</small>
+              <p class="pill-inst" data-i18n="pill_morning_inst">Take with half a glass of warm water.</p>
+            </div>
+            <div class="pill-action-col">
+              <button type="button" class="pill-btn done" data-pill-id="morning" data-i18n="pill_btn_done">Taken ✓</button>
+            </div>
+          </article>
+
+          <!-- Afternoon Pill -->
+          <article class="pill-card due-card" id="pill-noon" data-pill-id="noon">
+            <div class="pill-badge-col">
+              <span class="pill-icon-sym" aria-hidden="true">☀️</span>
+              <span class="pill-status-tag due" id="noon-status" data-i18n="pill_status_due">Due now</span>
+            </div>
+            <div class="pill-info-col">
+              <strong data-i18n="pill_noon_t">Multivitamin & Calcium Capsule</strong>
+              <small class="pill-time" data-i18n="pill_noon_time">Afternoon · 1:30 PM (After Lunch)</small>
+              <p class="pill-inst" data-i18n="pill_noon_inst">Take with your afternoon meal.</p>
+            </div>
+            <div class="pill-action-col">
+              <button type="button" class="pill-btn" data-pill-id="noon" data-i18n="pill_btn_take">Mark as Taken</button>
+            </div>
+          </article>
+
+          <!-- Night Pill -->
+          <article class="pill-card" id="pill-night" data-pill-id="night">
+            <div class="pill-badge-col">
+              <span class="pill-icon-sym" aria-hidden="true">🌙</span>
+              <span class="pill-status-tag upcoming" id="night-status" data-i18n="pill_status_upcoming">Scheduled for tonight</span>
+            </div>
+            <div class="pill-info-col">
+              <strong data-i18n="pill_night_t">Sugar & Diabetes Tablet (Metformin 500mg)</strong>
+              <small class="pill-time" data-i18n="pill_night_time">Night · 8:30 PM (After Dinner)</small>
+              <p class="pill-inst" data-i18n="pill_night_inst">Take right after dinner before bedtime.</p>
+            </div>
+            <div class="pill-action-col">
+              <button type="button" class="pill-btn" data-pill-id="night" data-i18n="pill_btn_take">Mark as Taken</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="notice">
+          <span aria-hidden="true">💊</span>
+          <p>These medication times are customized for your health profile. Caregiver Anita receives an automatic update when medicines are marked as taken.</p>
+        </div>
+      </section>
+
+      <!-- VIEW 4: HELP VIEW -->
+      <section class="view" id="help-view">
+        <div class="page-intro">
+          <span class="eyebrow" data-i18n="h_eyebrow">HELP IS CLOSE BY</span>
+          <h2 data-i18n="h_h">What kind of help do you need?</h2>
+          <p data-i18n="h_p">Choose an option. This demo will show what would happen next.</p>
+          <button type="button" class="secondary-button" id="read-help-voice" style="margin-top:12px;">
+            <span data-i18n="read_help">🔊 Read Help Options</span>
+          </button>
+        </div>
+        <div class="help-options">
+          <button class="help-option" id="demo-sos">
+            <span class="help-symbol red" aria-hidden="true">!</span>
+            <span>
+              <strong data-i18n="h_sos_t">Emergency situation</strong>
+              <small data-i18n="h_sos_s">Show emergency contact options</small>
+            </span>
+            <b aria-hidden="true">→</b>
+          </button>
+          <button class="help-option" id="demo-family">
+            <span class="help-symbol green" aria-hidden="true">♡</span>
+            <span>
+              <strong data-i18n="h_fam_t">Contact my family</strong>
+              <small data-i18n="h_fam_s">Choose someone from your people</small>
+            </span>
+            <b aria-hidden="true">→</b>
+          </button>
+          <button class="help-option" id="demo-instructions">
+            <span class="help-symbol gold" aria-hidden="true">?</span>
+            <span>
+              <strong data-i18n="h_ins_t">I need help using this app</strong>
+              <small data-i18n="h_ins_s">Hear a simple explanation</small>
+            </span>
+            <b aria-hidden="true">→</b>
+          </button>
+        </div>
+        <p class="safety-note" data-i18n="h_safety">Prototype note: This page does not contact emergency services. In a real emergency, use your local emergency number or ask someone nearby for help.</p>
+      </section>
+
+      <!-- VIEW 5: MESSAGES VIEW -->
+      <section class="view" id="messages-view">
+        <div class="page-intro">
+          <span class="eyebrow" data-i18n="m_eyebrow">KEEP IN TOUCH</span>
+          <h2 data-i18n="m_h">Messages</h2>
+          <p data-i18n="m_p">A simple example of how a message could appear.</p>
+        </div>
+        <article class="message-card">
+          <span class="contact-avatar peach" aria-hidden="true">A</span>
+          <div>
+            <strong data-i18n="n_anita">Anita</strong>
+            <small data-i18n="m_time">Today · 10:42 AM</small>
+            <p data-i18n="m_body">Good morning! Hope you have a lovely day. I'll call you this evening. ❤️</p>
+          </div>
+        </article>
+        <button class="primary-button" id="read-message" data-i18n="m_read">🔊 Read this message aloud</button>
+      </section>
+
+      <!-- VIEW 6: TEACHER & USER FEEDBACK (NEW SECTION REQUESTED BY USER'S TEACHER) -->
+      <section class="view" id="feedback-view">
+        <div class="page-intro">
+          <span class="eyebrow" data-i18n="fb_eyebrow">DESIGN-THINKING TEST & EVALUATION</span>
+          <h2 data-i18n="fb_h">Teacher & User Feedback Portal</h2>
+          <p data-i18n="fb_p">Our college teachers requested that we test this prototype with real users and evaluators, collect feedback, and add new features based on their suggestions.</p>
+          <button type="button" class="secondary-button" id="read-feedback-voice" style="margin-top:12px;">
+            <span data-i18n="read_feedback">🔊 Read Feedback Guide</span>
+          </button>
+        </div>
+
+        <div class="feedback-layout">
+          <!-- Submission Form -->
+          <div class="feedback-form-box">
+            <h3 data-i18n="fb_form_title">Submit an Evaluation / Feedback</h3>
+            <form id="evaluation-form">
+              <div class="form-group">
+                <label for="fb-name" class="form-label" data-i18n="fb_name_label">Your Name</label>
+                <input type="text" id="fb-name" class="form-input" placeholder="e.g. Prof. R. Sharma / Mrs. Lakshmi" data-i18n-ph="fb_name_ph" required />
+              </div>
+
+              <div class="form-group">
+                <label for="fb-role" class="form-label" data-i18n="fb_role_label">I am evaluating as:</label>
+                <select id="fb-role" class="form-select">
+                  <option value="teacher" data-i18n="fb_role_teacher">Faculty / Teacher Evaluator</option>
+                  <option value="senior" data-i18n="fb_role_senior">Senior Citizen (Primary User)</option>
+                  <option value="caregiver" data-i18n="fb_role_caregiver">Family Caregiver / Relative</option>
+                  <option value="student" data-i18n="fb_role_student">Peer Student / Reviewer</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" data-i18n="fb_rating_label">Overall Accessibility & Ease of Use (1 = Difficult, 5 = Excellent):</label>
+                <div class="rating-stars" role="radiogroup" aria-label="Rating">
+                  <button type="button" class="star-btn" data-rating="1" aria-label="1 star">★</button>
+                  <button type="button" class="star-btn" data-rating="2" aria-label="2 stars">★</button>
+                  <button type="button" class="star-btn" data-rating="3" aria-label="3 stars">★</button>
+                  <button type="button" class="star-btn" data-rating="4" aria-label="4 stars">★</button>
+                  <button type="button" class="star-btn active" data-rating="5" aria-label="5 stars">★</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" data-i18n="fb_feat_label">Which features did you test?</label>
+                <div class="feature-tag-checkboxes">
+                  <label class="tag-check">
+                    <input type="checkbox" name="fb_feat" value="login" checked />
+                    <span data-i18n="fb_f_login">Trilingual Login (Hindi/Kannada/English)</span>
+                  </label>
+                  <label class="tag-check">
+                    <input type="checkbox" name="fb_feat" value="voice" checked />
+                    <span data-i18n="fb_f_voice">Voice Guidance & Read Aloud</span>
+                  </label>
+                  <label class="tag-check">
+                    <input type="checkbox" name="fb_feat" value="contrast" checked />
+                    <span data-i18n="fb_f_contrast">Adjustable Text Size & High Contrast</span>
+                  </label>
+                  <label class="tag-check">
+                    <input type="checkbox" name="fb_feat" value="pills" checked />
+                    <span data-i18n="fb_f_pills">Daily Pill Tracker</span>
+                  </label>
+                  <label class="tag-check">
+                    <input type="checkbox" name="fb_feat" value="sos" />
+                    <span data-i18n="fb_f_sos">Emergency Contact Flow</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="fb-comments" class="form-label" data-i18n="fb_comments_label">What worked well? What new features should we add next?</label>
+                <textarea id="fb-comments" class="form-textarea" rows="3" placeholder="Share your thoughts or suggest features for the next iteration..." data-i18n-ph="fb_comments_ph" required></textarea>
+              </div>
+
+              <button type="submit" class="primary-button full-btn" id="submit-feedback-btn">
+                <span data-i18n="fb_submit_btn">Submit Feedback & Add to Design Log</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Live Log / Feedback Iterations Display -->
+          <div class="feedback-log-box">
+            <div>
+              <h3 data-i18n="fb_log_title">Live Feedback & Iterations Log</h3>
+              <p class="small-hint" data-i18n="fb_log_sub">Real feedback gathered during classroom evaluations and user testing:</p>
+            </div>
+            
+            <div class="feedback-cards-container" id="feedback-cards-container">
+              <!-- Dynamically populated from script.js and stored in localStorage -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 7: SETTINGS VIEW -->
+      <section class="view" id="settings-view">
+        <div class="page-intro">
+          <span class="eyebrow" data-i18n="s_eyebrow">YOUR PHONE, YOUR WAY</span>
+          <h2 data-i18n="s_h">Accessibility settings</h2>
+          <p data-i18n="s_p">Adjust the screen to make it easier and more comfortable to use.</p>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong id="lang-label" data-i18n="s_lang">Language</strong>
+            <small data-i18n="s_lang_s">Choose the language you prefer</small>
+          </div>
+          <div class="lang-controls" role="radiogroup" aria-labelledby="lang-label">
+            <button type="button" role="radio" aria-checked="true" data-lang="en">English</button>
+            <button type="button" role="radio" aria-checked="false" data-lang="hi" lang="hi">हिन्दी</button>
+            <button type="button" role="radio" aria-checked="false" data-lang="kn" lang="kn">ಕನ್ನಡ</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong data-i18n="s_size">Text size</strong>
+            <small data-i18n="s_size_s">Make words easier to read</small>
+          </div>
+          <div class="size-controls" role="group">
+            <button id="smaller-text" data-i18n-aria="s_smaller" aria-label="Decrease text size">A−</button>
+            <span class="size-label" id="size-label" aria-live="polite">Normal</span>
+            <button id="larger-text" data-i18n-aria="s_larger" aria-label="Increase text size">A+</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong data-i18n="s_contrast">High contrast</strong>
+            <small data-i18n="s_contrast_s">Make text and buttons stand out</small>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="contrast-toggle" data-i18n-aria="s_contrast" aria-label="High contrast">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong data-i18n="s_spacing">Extra spacing</strong>
+            <small data-i18n="s_spacing_s">Add more space between buttons</small>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="spacing-toggle" data-i18n-aria="s_spacing" aria-label="Extra spacing">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong data-i18n="s_voice">Read instructions aloud</strong>
+            <small data-i18n="s_voice_s">Test voice reading in Kannada, Hindi & English</small>
+          </div>
+          <div class="voice-test-group">
+            <button type="button" class="tool-btn voice-test-btn" id="test-voice-kn">🔊 ಕನ್ನಡ (Kannada)</button>
+            <button type="button" class="tool-btn voice-test-btn" id="test-voice-hi">🔊 हिन्दी (Hindi)</button>
+            <button type="button" class="tool-btn voice-test-btn" id="test-voice-en">🔊 English</button>
+          </div>
+        </div>
+
+        <div class="notice">
+          <span aria-hidden="true">✓</span>
+          <p data-i18n="s_notice">Your display preferences are applied immediately and saved on this device, so they will still be here next time.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Floating Audio Voice Control Bar -->
+  <div class="voice-floating-bar" id="voice-floating-bar" aria-live="polite">
+    <div class="voice-wave" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="voice-bar-text">
+      <strong id="voice-bar-lang">Speaking…</strong>
+      <p id="voice-bar-copy"></p>
+    </div>
+    <button type="button" class="voice-stop-btn" id="voice-stop-btn" aria-label="Stop speaking">⏹ Stop</button>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Accessibility Modal Backdrop -->
+  <div class="modal-backdrop" id="modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-copy">
+      <button class="modal-close" id="modal-close" data-i18n-aria="close" aria-label="Close">×</button>
+      <div class="modal-symbol" id="modal-symbol" aria-hidden="true">☎</div>
+      <h2 id="modal-title">Call Anita?</h2>
+      <p id="modal-copy">This is a demonstration. No call will be placed.</p>
+      <div class="modal-actions">
+        <button class="secondary-button" id="modal-cancel" data-i18n="back">Go back</button>
+        <button class="primary-button" id="modal-confirm" data-i18n="okay">Okay</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="translations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
